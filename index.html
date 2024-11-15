@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人网站</title>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- AOS 动画库 CDN -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/aos/2.3.1/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -84,7 +84,7 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -281,30 +281,6 @@
             }
         }
 
-        /* 添加加载动画样式 */
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #007bff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-        }
-
-        .carousel-item.loading .loading-spinner {
-            display: block;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
         /* 优化轮播图样式 */
         .carousel {
             position: relative;
@@ -378,24 +354,19 @@
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <div class="loading-spinner"></div>
-                        <img src="./images/1.jpg" alt="作品1" loading="lazy">
+                        <img src="./images/1.jpg" alt="作品1">
                     </div>
                     <div class="carousel-item">
-                        <div class="loading-spinner"></div>
-                        <img src="./images/2.jpg" alt="作品2" loading="lazy">
+                        <img src="./images/2.jpg" alt="作品2">
                     </div>
                     <div class="carousel-item">
-                        <div class="loading-spinner"></div>
-                        <img src="./images/3.jpg" alt="作品3" loading="lazy">
+                        <img src="./images/3.jpg" alt="作品3">
                     </div>
                     <div class="carousel-item">
-                        <div class="loading-spinner"></div>
-                        <img src="./images/4.jpg" alt="作品4" loading="lazy">
+                        <img src="./images/4.jpg" alt="作品4">
                     </div>
                     <div class="carousel-item">
-                        <div class="loading-spinner"></div>
-                        <img src="./images/5.jpg" alt="作品5" loading="lazy">
+                        <img src="./images/5.jpg" alt="作品5">
                     </div>
                 </div>
                 <button class="carousel-control prev">
@@ -427,7 +398,7 @@
     </footer>
 
     <!-- AOS 动画库 -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/aos/2.3.1/aos.js"></script>
     <script>
         // 初始化 AOS
         AOS.init({
@@ -485,13 +456,6 @@
             const translateX = -currentIndex * 100;
             carouselInner.style.transform = `translateX(${translateX}%)`;
             updateIndicators();
-            
-            // 预加载下一张图片
-            const nextIndex = (index + 1) % items.length;
-            const nextImg = items[nextIndex].querySelector('img');
-            if (nextImg) {
-                nextImg.setAttribute('loading', 'eager');
-            }
         }
 
         // 下一张幻灯片
@@ -512,14 +476,6 @@
 
         // 自动轮播
         setInterval(nextSlide, 5000);
-
-        // 添加图片加载处理
-        document.querySelectorAll('.carousel-item img').forEach(img => {
-            img.parentElement.classList.add('loading');
-            img.onload = function() {
-                this.parentElement.classList.remove('loading');
-            }
-        });
     </script>
 </body>
 </html>
