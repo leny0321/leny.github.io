@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人网站</title>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.0.0/css/all.min.css">
+    <!-- 预加载所有图片 -->
+    <link rel="preload" as="image" href="./images/background.jpg">
+    <link rel="preload" as="image" href="./images/6.jpg">
+    <link rel="preload" as="image" href="./images/1.jpg">
+    <link rel="preload" as="image" href="./images/2.jpg">
+    <link rel="preload" as="image" href="./images/3.jpg">
+    <link rel="preload" as="image" href="./images/4.jpg">
+    <link rel="preload" as="image" href="./images/5.jpg">
     <!-- 移除 Google Fonts，使用系统字体 -->
     <style>
         * {
@@ -298,10 +306,6 @@
             }
         }
     </style>
-    <!-- 在head中添加预加载指令 -->
-    <link rel="preload" as="image" href="./images/background.jpg">
-    <link rel="preload" as="image" href="./images/6.jpg">
-    <link rel="preload" as="image" href="./images/1.jpg">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -352,16 +356,16 @@
                         <img src="./images/1.jpg" alt="作品1" importance="high" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/2.jpg" alt="作品2">
+                        <img src="./images/2.jpg" alt="作品2" importance="high" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/3.jpg" alt="作品3">
+                        <img src="./images/3.jpg" alt="作品3" importance="high" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/4.jpg" alt="作品4">
+                        <img src="./images/4.jpg" alt="作品4" importance="high" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/5.jpg" alt="作品5">
+                        <img src="./images/5.jpg" alt="作品5" importance="high" loading="eager">
                     </div>
                 </div>
                 <button class="carousel-control prev">
@@ -421,6 +425,16 @@
 
         // 自动轮播
         setInterval(nextSlide, 5000);
+
+        // 添加错误处理脚本
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                console.log('Image load error:', e.target.src);
+                setTimeout(() => {
+                    e.target.src = e.target.src;
+                }, 1000);
+            }
+        }, true);
     </script>
 </body>
 </html>
