@@ -84,9 +84,7 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             color: white;
         }
 
@@ -94,8 +92,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             z-index: -1;
         }
 
@@ -103,16 +101,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        .home-background::after {
-            content: '';
+        .home-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.25);
+            z-index: -1;
         }
 
         .home-content {
@@ -163,6 +162,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            display: block;
         }
 
         .about-image img:hover {
@@ -337,6 +337,7 @@
         <div class="home-background">
             <img src="./images/background.jpg" alt="背景" fetchpriority="high">
         </div>
+        <div class="home-overlay"></div>
         <div class="container home-content">
             <h1 data-aos="fade-up">Hello, 我是你爹</h1>
             <p data-aos="fade-up" data-aos-delay="200">A Passionate Developer</p>
@@ -351,7 +352,7 @@
                 <p>我叫黄崇培，我有两个兄弟分别是黄浩和刘航行，我们是王亮的儿子。我一直以来都受到父亲王亮的影响和启发，在他的教导下成长，获得了很多宝贵的生活经验和道理。他不仅是我的父亲，也是我人生道路上的导师与榜样。</p>
             </div>
             <div class="about-image" data-aos="fade-left">
-                <img src="./images/6.jpg" alt="About Me">
+                <img src="./images/6.jpg" alt="About Me" fetchpriority="high">
             </div>
         </div>
     </section>
@@ -363,19 +364,19 @@
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="./images/1.jpg" alt="作品1" loading="eager" decoding="sync" fetchpriority="high">
+                        <img src="./images/1.jpg" alt="作品1" fetchpriority="high">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/2.jpg" alt="作品2" loading="eager" decoding="sync" fetchpriority="high">
+                        <img src="./images/2.jpg" alt="作品2" fetchpriority="high">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/3.jpg" alt="作品3" loading="eager" decoding="sync" fetchpriority="high">
+                        <img src="./images/3.jpg" alt="作品3" fetchpriority="high">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/4.jpg" alt="作品4" loading="eager" decoding="sync" fetchpriority="high">
+                        <img src="./images/4.jpg" alt="作品4" fetchpriority="high">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/5.jpg" alt="作品5" loading="eager" decoding="sync" fetchpriority="high">
+                        <img src="./images/5.jpg" alt="作品5" fetchpriority="high">
                     </div>
                 </div>
                 <button class="carousel-control prev">
