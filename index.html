@@ -2,18 +2,18 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>个人网站</title>
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- 预加载所有图片 -->
-    <link rel="preload" as="image" href="./images/background.jpg">
-    <link rel="preload" as="image" href="./images/6.jpg">
-    <link rel="preload" as="image" href="./images/1.jpg">
-    <link rel="preload" as="image" href="./images/2.jpg">
-    <link rel="preload" as="image" href="./images/3.jpg">
-    <link rel="preload" as="image" href="./images/4.jpg">
-    <link rel="preload" as="image" href="./images/5.jpg">
+    <link rel="preload" as="image" href="./images/background.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/6.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/1.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/2.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/3.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/4.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="./images/5.jpg" fetchpriority="high">
     <!-- 移除 Google Fonts，使用系统字体 -->
     <style>
         * {
@@ -398,6 +398,16 @@
 
     <!-- 简化 JavaScript，只保留必要的轮播功能 -->
     <script>
+        let retryCount = 0;
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG' && retryCount < 3) {
+                retryCount++;
+                setTimeout(() => {
+                    e.target.src = e.target.src + '?retry=' + retryCount;
+                }, 1000);
+            }
+        }, true);
+
         // 轮播功能
         const carousel = document.querySelector('.carousel');
         const carouselInner = carousel.querySelector('.carousel-inner');
@@ -425,16 +435,6 @@
 
         // 自动轮播
         setInterval(nextSlide, 5000);
-
-        // 添加错误处理脚本
-        window.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG') {
-                console.log('Image load error:', e.target.src);
-                setTimeout(() => {
-                    e.target.src = e.target.src;
-                }, 1000);
-            }
-        }, true);
     </script>
 </body>
 </html>
