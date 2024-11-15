@@ -84,9 +84,9 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg');
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg') no-repeat center center;
             background-size: cover;
-            background-position: center;
+            background-attachment: fixed;
             color: white;
         }
 
@@ -161,7 +161,7 @@
             width: 100%;
             height: 500px;
             object-fit: cover;
-            transition: opacity 0.3s ease;
+            display: block;
         }
 
         .carousel-control {
@@ -278,36 +278,8 @@
 
             .carousel-item img {
                 height: 300px;
-            }
-        }
-
-        /* 优化轮播图样式 */
-        .carousel {
-            position: relative;
-            max-width: 800px;
-            margin: 40px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            background: #f8f9fa;
-        }
-
-        .carousel-item {
-            position: relative;
-            min-width: 100%;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            .carousel-item img {
-                height: 300px;
+                object-fit: cover;
+                display: block;
             }
         }
     </style>
@@ -354,19 +326,19 @@
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="./images/1.jpg" alt="作品1">
+                        <img src="./images/1.jpg" alt="作品1" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/2.jpg" alt="作品2">
+                        <img src="./images/2.jpg" alt="作品2" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/3.jpg" alt="作品3">
+                        <img src="./images/3.jpg" alt="作品3" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/4.jpg" alt="作品4">
+                        <img src="./images/4.jpg" alt="作品4" loading="eager">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/5.jpg" alt="作品5">
+                        <img src="./images/5.jpg" alt="作品5" loading="eager">
                     </div>
                 </div>
                 <button class="carousel-control prev">
