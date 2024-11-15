@@ -144,6 +144,7 @@
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #f8f9fa;
         }
 
         .carousel-inner {
@@ -152,14 +153,15 @@
         }
 
         .carousel-item {
-            min-width: 100%;
             position: relative;
+            min-width: 100%;
         }
 
         .carousel-item img {
             width: 100%;
             height: 500px;
             object-fit: cover;
+            transition: opacity 0.3s ease;
         }
 
         .carousel-control {
@@ -273,6 +275,64 @@
             .home-content p {
                 font-size: 18px;
             }
+
+            .carousel-item img {
+                height: 300px;
+            }
+        }
+
+        /* 添加加载动画样式 */
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .carousel-item.loading .loading-spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* 优化轮播图样式 */
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+        }
+
+        .carousel-item {
+            position: relative;
+            min-width: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -303,10 +363,10 @@
         <div class="container about-content">
             <div class="about-text" data-aos="fade-right">
                 <h2>关于我</h2>
-                <p>我叫黄崇培，我有两个兄弟分别是黄浩和刘航行，我们是王亮的儿子。我一直以来都受到父亲影响和启发，在他的教导下成长，获得了很多宝贵的生活经验和道理。他不仅是我的父亲，也是我人生道路上的导师与榜样。</p>
+                <p>我叫黄崇培，我有两个兄弟分别是黄浩和刘航行，我们是王亮的儿子。我一直以来都受到父亲响和启发，在他教导下成长，获得了很多宝贵的生活经验和道理。他不仅是我的父亲，也是我人生道路上的导师与榜样。</p>
             </div>
             <div class="about-image" data-aos="fade-left">
-                <img src="images/6.jpg" alt="About Me">
+                <img src="./images/6.jpg" alt="About Me">
             </div>
         </div>
     </section>
@@ -318,19 +378,24 @@
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="images/1.jpg" alt="作品1">
+                        <div class="loading-spinner"></div>
+                        <img src="./images/1.jpg" alt="作品1" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/2.jpg" alt="作品2">
+                        <div class="loading-spinner"></div>
+                        <img src="./images/2.jpg" alt="作品2" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/3.jpg" alt="作品3">
+                        <div class="loading-spinner"></div>
+                        <img src="./images/3.jpg" alt="作品3" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/4.jpg" alt="作品4">
+                        <div class="loading-spinner"></div>
+                        <img src="./images/4.jpg" alt="作品4" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/5.jpg" alt="作品5">
+                        <div class="loading-spinner"></div>
+                        <img src="./images/5.jpg" alt="作品5" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control prev">
@@ -417,8 +482,16 @@
         // 切换到指定幻灯片
         function goToSlide(index) {
             currentIndex = index;
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            const translateX = -currentIndex * 100;
+            carouselInner.style.transform = `translateX(${translateX}%)`;
             updateIndicators();
+            
+            // 预加载下一张图片
+            const nextIndex = (index + 1) % items.length;
+            const nextImg = items[nextIndex].querySelector('img');
+            if (nextImg) {
+                nextImg.setAttribute('loading', 'eager');
+            }
         }
 
         // 下一张幻灯片
@@ -439,6 +512,14 @@
 
         // 自动轮播
         setInterval(nextSlide, 5000);
+
+        // 添加图片加载处理
+        document.querySelectorAll('.carousel-item img').forEach(img => {
+            img.parentElement.classList.add('loading');
+            img.onload = function() {
+                this.parentElement.classList.remove('loading');
+            }
+        });
     </script>
 </body>
 </html>
