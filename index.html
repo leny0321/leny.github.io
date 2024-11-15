@@ -84,13 +84,34 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             color: white;
-            will-change: transform;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .home-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .home-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .home-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.25);
         }
 
         .home-content {
@@ -312,6 +333,9 @@
 
     <!-- 首页部分 -->
     <section id="home">
+        <div class="home-background">
+            <img src="./images/background.jpg" alt="背景" fetchpriority="high">
+        </div>
         <div class="container home-content">
             <h1 data-aos="fade-up">Hello, 我是你爹</h1>
             <p data-aos="fade-up" data-aos-delay="200">A Passionate Developer</p>
