@@ -6,14 +6,13 @@
     <title>个人网站</title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.loli.net/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 移除 Google Fonts，使用系统字体 -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -82,10 +81,33 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('./images/background.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             color: white;
+        }
+
+        .home-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .home-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .home-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
         }
 
         .home-content {
@@ -276,6 +298,10 @@
             }
         }
     </style>
+    <!-- 在head中添加预加载指令 -->
+    <link rel="preload" as="image" href="./images/background.jpg">
+    <link rel="preload" as="image" href="./images/6.jpg">
+    <link rel="preload" as="image" href="./images/1.jpg">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -293,6 +319,10 @@
 
     <!-- 首页部分 -->
     <section id="home">
+        <div class="home-background">
+            <img src="./images/background.jpg" alt="背景" importance="high" loading="eager">
+        </div>
+        <div class="home-overlay"></div>
         <div class="container home-content">
             <h1>Hello, 我是你爹</h1>
             <p>A Passionate Developer</p>
@@ -307,7 +337,7 @@
                 <p>我叫黄崇培，我有两个兄弟分别是黄浩和刘航行，我们是王亮的儿子。我一直以来都受到父亲王亮的影响和启发，在他的教导下成长，获得了很多宝贵的生活经验和道理。他不仅是我的父亲，也是我人生道路上的导师与榜样。</p>
             </div>
             <div class="about-image">
-                <img src="./images/6.jpg" alt="About Me">
+                <img src="./images/6.jpg" alt="About Me" importance="high" loading="eager">
             </div>
         </div>
     </section>
@@ -319,7 +349,7 @@
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="./images/1.jpg" alt="作品1">
+                        <img src="./images/1.jpg" alt="作品1" importance="high" loading="eager">
                     </div>
                     <div class="carousel-item">
                         <img src="./images/2.jpg" alt="作品2">
